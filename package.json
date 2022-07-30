@@ -1,0 +1,14 @@
+{
+  "name": "iconnect",
+  "version": "1.0.0",
+  "description": "This is a social connection website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "social"
+  ],
+  "author": "Atif",
+  "license": "ISC"
+}
