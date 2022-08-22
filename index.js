@@ -1,5 +1,5 @@
 const express = require('express');
-const ejs = require('ejs');
+// const ejs = require('ejs');
 const path = require('path');
 const port = 8000;
 
@@ -12,7 +12,7 @@ app.use('/', require('./routes'));
 
 // setting up the views for ejs
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views'));  // OR app.set('views', './views');
 
 
 
