@@ -7,8 +7,15 @@ const expressLayouts = require('express-ejs-layouts');
 // creating app of express
 const app = express();
 
+// using static files
+app.use(express.static('./assets'));
+
 // telling app to use expressLayouts
 app.use(expressLayouts);
+
+// extract styles and scripts
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 // any request from browser for '/' sent to routes folder
 app.use('/', require('./routes'));
