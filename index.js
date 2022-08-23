@@ -2,9 +2,13 @@ const express = require('express');
 // const ejs = require('ejs');
 const path = require('path');
 const port = 8000;
+const expressLayouts = require('express-ejs-layouts');
 
 // creating app of express
 const app = express();
+
+// telling app to use expressLayouts
+app.use(expressLayouts);
 
 // any request from browser for '/' sent to routes folder
 app.use('/', require('./routes'));
