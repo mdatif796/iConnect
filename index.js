@@ -4,6 +4,9 @@ const path = require('path');
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 
+// setting up the connection with the database
+const db = require('./config/databaseConnection');
+
 // creating app of express
 const app = express();
 
@@ -13,7 +16,7 @@ app.use(express.static('./assets'));
 // telling app to use expressLayouts
 app.use(expressLayouts);
 
-// extract styles and scripts
+// extract styles and scripts from sub pages and include it in layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
