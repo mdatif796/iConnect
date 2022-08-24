@@ -10,4 +10,11 @@ router.get('/', userController.user);
 // get request for '/user/profile' from browser 
 router.get('/profile', userController.profile);
 
+
+
+// get request for '/user/sign-in' from browser
+router.get('/sign-in', userController.sign_in);
+// get request for '/user/sign-up' from browser
+router.get('/sign-up', userController.sign_up);
+
 module.exports = router;
