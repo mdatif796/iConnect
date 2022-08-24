@@ -17,4 +17,7 @@ router.get('/sign-in', userController.sign_in);
 // get request for '/user/sign-up' from browser
 router.get('/sign-up', userController.sign_up);
 
+// post request for creating a user
+router.post('/create-user', userController.create_user);
+
 module.exports = router;

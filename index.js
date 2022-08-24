@@ -1,4 +1,6 @@
+const bodyParser = require('body-parser');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 // const ejs = require('ejs');
 const path = require('path');
 const port = 8000;
@@ -9,6 +11,11 @@ const db = require('./config/databaseConnection');
 
 // creating app of express
 const app = express();
+
+// for parsing the cookie
+app.use(cookieParser());
+// for parsing the data which comes from browser
+app.use(bodyParser.urlencoded({extended: false}));
 
 // using static files
 app.use(express.static('./assets'));
