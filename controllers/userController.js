@@ -64,5 +64,5 @@ module.exports.create_user = function(req, res){
 
 // controller for creating a session that is sign in
 module.exports.create_session = function(req, res){
-    // TODO
+    return res.redirect('/');
 }

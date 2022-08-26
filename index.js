@@ -9,13 +9,18 @@ const expressLayouts = require('express-ejs-layouts');
 // setting up the connection with the database
 const db = require('./config/databaseConnection');
 
+// passport authentication
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const session = require('express-session');
+
 // creating app of express
 const app = express();
 
-// for parsing the cookie
-app.use(cookieParser());
 // for parsing the data which comes from browser
 app.use(bodyParser.urlencoded({extended: false}));
+// for parsing the cookie
+app.use(cookieParser());
 
 // using static files
 app.use(express.static('./assets'));
@@ -27,13 +32,28 @@ app.use(expressLayouts);
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-// any request from browser for '/' sent to routes folder
-app.use('/', require('./routes'));
+
 
 
 // setting up the views for ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));  // OR app.set('views', './views');
+
+app.use(session({
+    name: 'iConnect',
+    secret: 'jaihind',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// any request from browser for '/' sent to routes folder
+app.use('/', require('./routes'));
 
 
 
