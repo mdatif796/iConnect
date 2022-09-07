@@ -1,6 +1,19 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
+
+// mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.DATABASE_PASS}@cluster0.lymyd.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`);
+
+// const db = mongoose.connection;
+
+// db.on('error', console.error.bind('Error in connecting with MongoDB'));
+
+// db.once('open', function(){
+//     console.log("Successfully connected with the MongoDB");
+// });
+
+// module.exports = db;
+
 // if connects with the database
 main().then(() => {
     return console.log("Database connected successfully with the server.");

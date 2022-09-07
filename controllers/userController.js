@@ -11,12 +11,19 @@ module.exports.user = function(req, res){
 
 // render the profile page
 module.exports.profile = function(req, res){
-    res.end('<h1> User profile </h1>');
+    return res.render('user_profile', {
+        title: "iConnect | user | profile"
+    });
 }
 
 
 // render the sign-in page
 module.exports.sign_in = function(req, res){
+    // if the user is already signed in
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    // if the user is not signed in
     return res.render('user_sign_in', {
         title: "sign-in"
     });
@@ -25,6 +32,11 @@ module.exports.sign_in = function(req, res){
 
 // render the sign-up page
 module.exports.sign_up = function(req, res){
+    // if the user is already signed in
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    // if the user is not signed in
     return res.render('user_sign_up', {
         title: "sign-up"
     });
@@ -65,4 +77,21 @@ module.exports.create_user = function(req, res){
 // controller for creating a session that is sign in
 module.exports.create_session = function(req, res){
     return res.redirect('/');
+}
+
+// sign out controller
+module.exports.destroySession = function(req, res){
+    // inbuilt function for logout provided by passport
+    if(req.isAuthenticated()){
+        req.logout(function(err){
+            if(err){
+                console.log("Error in logging out");
+                return;
+            }
+        });
+        return res.redirect('/');
+    }else{
+        return res.redirect('/');
+    }
+    
 }

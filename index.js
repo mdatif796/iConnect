@@ -1,5 +1,8 @@
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
+// creating app of express
+const app = express();
 const cookieParser = require('cookie-parser');
 // const ejs = require('ejs');
 const path = require('path');
@@ -10,12 +13,12 @@ const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/databaseConnection');
 
 // passport authentication
+const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-const session = require('express-session');
+// for permanently store session cookies to db
+const MongoStore = require('connect-mongo');
 
-// creating app of express
-const app = express();
 
 // for parsing the data which comes from browser
 app.use(bodyParser.urlencoded({extended: false}));
@@ -46,11 +49,21 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
+    },
+    store: MongoStore.create({
+        mongoUrl: `mongodb+srv://${process.env.MONGO_USER}:${process.env.DATABASE_PASS}@cluster0.lymyd.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
+        autoRemove: 'disabled'
+    },
+    function(err){
+        console.log(err || "MongoStore connnection setup ok");
     }
+    )
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 // any request from browser for '/' sent to routes folder
 app.use('/', require('./routes'));
