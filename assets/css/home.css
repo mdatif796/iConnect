@@ -1,0 +1,6 @@
+#posts-list-container {
+  display: flex;
+  width: 100%; }
+  #posts-list-container .post-list {
+    width: 15%;
+    margin-right: 2rem; }
