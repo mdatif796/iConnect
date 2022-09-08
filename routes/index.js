@@ -9,5 +9,7 @@ router.get('/', homeController.home);
 
 // any request that come for '/user' from browser sent to routes of user
 router.use('/users', require('./user'));
+// any request that come for '/posts' from browser sent to routes of post
+router.use('/posts', require('./post'));
 
 module.exports = router;

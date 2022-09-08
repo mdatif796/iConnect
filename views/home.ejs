@@ -1,2 +1,13 @@
-    <link rel="stylesheet" href="/css/home.css">
-    <h1> iConnect / <%= title %> </h1>
+<link rel="stylesheet" href="/css/home.css">
+<h1> iConnect / <%= title %> </h1>
+
+<% if(locals.user){ %>
+    <div id="post-section">
+        <form action="/posts/create-post" method="post">
+            <h1>Post</h1>
+            <textarea name="content" id="content" cols="30" rows="3" placeholder="Type here ..." required></textarea>
+            <input type="submit">
+        </form>
+    </div>    
+<% } %> 
+
