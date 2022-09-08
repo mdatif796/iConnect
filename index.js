@@ -18,6 +18,16 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 // for permanently store session cookies to db
 const MongoStore = require('connect-mongo');
+// scss
+const nodeSassMiddleware = require('node-sass-middleware');
+// middleware for using scss
+app.use(nodeSassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
+}));
 
 
 // for parsing the data which comes from browser
