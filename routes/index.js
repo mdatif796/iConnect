@@ -11,5 +11,7 @@ router.get('/', homeController.home);
 router.use('/users', require('./user'));
 // any request that come for '/posts' from browser sent to routes of post
 router.use('/posts', require('./post'));
+// any request that came for '/comment' fromm browser sent to routes of comment
+router.use('/comments', require('./comment'));
 
 module.exports = router;
