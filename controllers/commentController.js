@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const { post } = require('../routes/post');
 
 module.exports.create = function(req, res){
     // find the post on which that comment is going to save
@@ -36,10 +37,16 @@ module.exports.destroy_comment = function(req, res){
     // first find the comment by it's id which comes from params
     Comment.findById(req.params.id, function(err, comment){
         // if the user which is logged in match with the user who makes this comment
-        if(comment.user == req.user.id){
+        // find the user of the post to make the functionality like if the user which is logged in is equal to
+        // the user who makes this post then he will delete the comment on his post
+        
+        // To Be done 
+
+        if((comment.user == req.user.id)){
             // 1st way of doing this
             let postId = comment.post;
             comment.remove();
+            // $pull is used to remove that id from comments
             Post.findByIdAndUpdate(postId, {$pull:{comments: req.params.id}}, function(err){
                 return res.redirect('back');
             });
