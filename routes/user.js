@@ -10,7 +10,9 @@ const passport = require('passport');
 router.get('/', userController.user);
 
 // get request for '/user/profile' from browser 
-router.get('/profile', passport.checkAuthentication, userController.profile);
+router.get('/profile/:id', passport.checkAuthentication, userController.profile);
+// post request for updating the profile 
+router.post('/update/:id', passport.checkAuthentication, userController.update);
 
 
 

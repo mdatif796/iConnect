@@ -2,7 +2,7 @@
     <h1 class="heading"><a href="/">iConnect</a></h1>
     <% if(locals.user){ %>
         <div class="header-part">
-            <h3><a href="/users/profile"><%= user.name %> </a> </h3>
+            <h3><a href="/users/profile/<%= user.id %> "><%= user.name %> </a> </h3>
             <h3><a href="/users/sign-out">Sign Out</a></h3>
         </div>
         <% }else{ %>
