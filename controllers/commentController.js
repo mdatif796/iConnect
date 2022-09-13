@@ -30,3 +30,36 @@ module.exports.create = function(req, res){
         }
     });
 }
+
+// destroying comment 
+module.exports.destroy_comment = function(req, res){
+    // first find the comment by it's id which comes from params
+    Comment.findById(req.params.id, function(err, comment){
+        // if the user which is logged in match with the user who makes this comment
+        if(comment.user == req.user.id){
+            // 1st way of doing this
+            let postId = comment.post;
+            comment.remove();
+            Post.findByIdAndUpdate(postId, {$pull:{comments: req.params.id}}, function(err){
+                return res.redirect('back');
+            });
+
+            // second way of doing this
+            // // then remove that comment
+            // comment.remove();
+            // // and we also have to remove from the comments array which is present inside the post
+            // // that's why we first find that post
+            // Post.findById(comment.post, function(err, post){
+
+            //     // find the index of that comment's id which should be deleted
+            //     const index = post.comments.indexOf(comment.id);
+            //     post.comments.splice(index, 1);
+            //     // after that save the post
+            //     post.save();
+                // return res.redirect('back');
+            // });
+        }else{
+            return res.redirect('back');
+        }
+    });
+}
