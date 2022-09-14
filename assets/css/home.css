@@ -1,6 +1,9 @@
-#posts-list-container {
-  display: flex;
-  width: 100%; }
-  #posts-list-container .post-list {
-    width: 15%;
-    margin-right: 2rem; }
+#feed-container {
+  width: 100%;
+  display: flex; }
+  #feed-container #section-1-posts {
+    width: 70%;
+    padding-left: 1rem; }
+  #feed-container #section-2-friends {
+    width: 20%;
+    padding-left: 1rem; }

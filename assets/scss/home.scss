@@ -1,9 +1,14 @@
-#posts-list-container{
-    display: flex;
+#feed-container{
     width: 100%;
+    display: flex;
 
-    .post-list{
-        width: 15%;
-        margin-right: 2rem;
+    #section-1-posts{
+        width: 70%;
+        padding-left: 1rem;
+    }
+
+    #section-2-friends{
+        width: 20%;
+        padding-left: 1rem;
     }
 }
