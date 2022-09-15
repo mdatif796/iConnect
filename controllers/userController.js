@@ -19,8 +19,8 @@ module.exports.profile = async function(req, res){
             profile_user: user
         });
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error', err);
+        return res.redirect('/');
     }
 
     // User.findById(req.params.id, function(err, user){
@@ -36,16 +36,18 @@ module.exports.update = async function(req, res){
     try {
         if(req.user.id == req.params.id){
             await User.findByIdAndUpdate(req.params.id, req.body);
+            req.flash('success', 'User Updated Successfully!');
             return res.redirect('back');
             // User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
             //     return res.redirect('back');
             // });
         }else{
+            req.flash('error', 'You cannot update this profile!');
             return res.status(401).send('Unauthorized!!');
         }
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error', err);
+        return res.redirect('back');
     }
 }
 
@@ -54,7 +56,8 @@ module.exports.update = async function(req, res){
 module.exports.sign_in = function(req, res){
     // if the user is already signed in
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        req.flash('error', 'User already Signed In!');
+        return res.redirect('/');
     }
     // if the user is not signed in
     return res.render('user_sign_in', {
@@ -67,7 +70,8 @@ module.exports.sign_in = function(req, res){
 module.exports.sign_up = function(req, res){
     // if the user is already signed in
     if(req.isAuthenticated()){
-        return res.redirect('/users/profile');
+        req.flash('error', 'User already Signed In!');
+        return res.redirect('/');
     }
     // if the user is not signed in
     return res.render('user_sign_up', {
@@ -81,6 +85,7 @@ module.exports.create_user = async function(req, res){
     try {
         // if both the password doesn't match
         if(req.body.password != req.body.confirm_password){
+            req.flash('error', 'Password does not match');
             return res.redirect('back');
         }
 
@@ -89,15 +94,17 @@ module.exports.create_user = async function(req, res){
         // if the user doesn't exist then creat that user
         if(!user){
             let user = await User.create(req.body);
+            req.flash('success', 'User Created Successfully');
             return res.redirect('/users/sign-in');
         // if the user exist then we simply redirect back
         }else{
+            req.flash('error', 'User Exist!');
             return res.redirect('back');
         }
 
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error', err);
+        return res.redirect('back');
     }
     // User.findOne({email: req.body.email}, (err, user) => {
     //     if(err){
@@ -135,7 +142,7 @@ module.exports.destroySession = async function(req, res){
         // inbuilt function for logout provided by passport
         req.logout((err) => {
             if(err){
-                console.log("Error in logging out");
+                req.flash('error', err);
                 return;
             }
             // sending the flash messages to the req
@@ -143,8 +150,8 @@ module.exports.destroySession = async function(req, res){
             return res.redirect('/');
         });
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error', err);
+        return res.redirect('/');
     }
     // inbuilt function for logout provided by passport
     // if(req.isAuthenticated()){

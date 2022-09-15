@@ -15,14 +15,15 @@ module.exports.create = async function(req, res){
             // saving the id of comment to Post's comment array
             post.comments.push(comment._id);
             post.save();
+            req.flash('success', 'Comment created Successfully!');
             return res.redirect('/');
         }else{
-            console.log('Post is not found on which you commented');
+            req.flash('error', 'Post is not found on which you commented');
             return res.redirect('/');
         }
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error', err);
+        return res.redirect('/');
     }
     
 }
@@ -72,15 +73,17 @@ module.exports.destroy_comment = async function(req, res){
             comment.remove();
             // $pull is used to remove that id from comments
             await Post.findByIdAndUpdate(postId, {$pull:{comments: req.params.id}});
+            req.flash('success', 'Comment Deleted Successfully!');
             return res.redirect('back');
 
         }else{
+            req.flash('error', 'You cannot delete this comment!');
             return res.redirect('back');
         }
 
     } catch (err) {
-        console.log('Error', err);
-        return;
+        req.flash('error', err);
+        return res.redirect('back');
     }
 }
 

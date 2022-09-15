@@ -8,15 +8,16 @@ const User = require('../models/user');
 
 // using passport middleware
 passport.use(new LocalStrategy({
-        usernameField: "email"
+        usernameField: "email",
+        passReqToCallback: true
     },
-    async function(email, password, done){
+    async function(req, email, password, done){
         try {
             // find the user using this email passed
             let user = await User.findOne({email: email});
             // if user not found or password doesn't match
             if(!user || user.password != password){
-                console.log("Invalid username/password");
+                req.flash('error', 'Invalid username/password');
                 // report to the passport that user doesn't exist
                 return done(null, false);
             }
@@ -27,8 +28,8 @@ passport.use(new LocalStrategy({
                 return done(null, user);
             }
         } catch (err) {
-            console.log('Error', err);
-            return;
+            req.flash('error', 'Error in finding the user --> passport');
+            return done(err);
         }
         // User.findOne({email: email}, function(err, user){
         //     // if error finds
