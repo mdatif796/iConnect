@@ -13,6 +13,9 @@
 </head>
 <body>
     <%- include('_header'); -%> 
+    <% if(locals.flash.success && locals.flash.success.length > 0) { %> 
+        <h5><%= locals.flash.success %> </h5>    
+    <% } %> 
     <main id="main-body">
         <%- body -%> 
     </main>

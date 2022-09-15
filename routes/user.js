@@ -30,7 +30,7 @@ router.post('/create-session', passport.authenticate('local', {failureRedirect: 
 );
 
 // get request for sign out
-router.get('/sign-out', userController.destroySession);
+router.get('/sign-out', passport.checkAuthentication, userController.destroySession);
 
 
 
