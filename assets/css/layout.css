@@ -1,7 +1,6 @@
 body {
-  margin: 0; }
-  body #main-body {
-    height: 100%; }
+  margin: 0;
+  background-color: #ededfb; }
 
 /* width */
 ::-webkit-scrollbar {
