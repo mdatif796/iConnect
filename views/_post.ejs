@@ -1,7 +1,7 @@
-<div class="post-list">
+<div id="post-<%= post._id %>">
     <h1>
         <% if((locals.user) && (locals.user.id == post.user.id)) { %>
-            <a href="/posts/destroy/<%= post.id %> ">X</a>
+            <a class="post-dlt-btn" href="/posts/destroy/<%= post.id %> ">X</a>
         <% } %>  
         <%= post.content %>   
     </h1>
@@ -15,7 +15,7 @@
         </form>
     </div>
 <% } %> 
-    <div class="post-comment-<%= post._id %> ">
+    <div class="post-comment-<%= post._id %>">
         <% for(comment of post.comments){ %>
             <%- include('_comment'); -%> 
         <% } %> 

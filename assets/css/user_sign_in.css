@@ -34,4 +34,6 @@
         border-radius: 4px;
         cursor: pointer;
         background-color: #f27700;
-        color: #ffffff; }
+        color: #ffffff;
+        outline: none;
+        margin-top: 1rem; }
