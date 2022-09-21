@@ -1,7 +1,9 @@
-<p>
-    <% if(locals.user && (locals.user.id == comment.user.id)) { %> 
-        <a href="/comments/destroy/<%= comment.id %>">X</a>
-    <% } %> 
-    <%= comment.content%>    
-</p>
-<p><%= comment.user.name %> </p>
+<div id="comment-container-<%= comment.id %>">
+    <p>
+        <% if(locals.user && (locals.user.id == comment.user.id)) { %> 
+            <a class="comment-dlt-btn" href="/comments/destroy/<%= comment.id %>">X</a>
+        <% } %> 
+        <%= comment.content%>    
+    </p>
+    <p><%= comment.user.name %> </p>
+</div>

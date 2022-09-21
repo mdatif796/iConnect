@@ -15,6 +15,15 @@ module.exports.create = async function(req, res){
             // saving the id of comment to Post's comment array
             post.comments.push(comment._id);
             post.save();
+            if(req.xhr){
+                await comment.populate('user', 'name');
+                return res.status(200).json({
+                    data: {
+                        comment: comment
+                    },
+                    message: "Comment Created!"
+                });
+            }
             req.flash('success', 'Comment created Successfully!');
             return res.redirect('/');
         }else{
@@ -73,6 +82,16 @@ module.exports.destroy_comment = async function(req, res){
             comment.remove();
             // $pull is used to remove that id from comments
             await Post.findByIdAndUpdate(postId, {$pull:{comments: req.params.id}});
+            
+            if(req.xhr){
+                return res.status(200).json({
+                    data: {
+                        commentId: req.params.id
+                    },
+                    message: 'Comment Deleted'
+                });
+            }
+
             req.flash('success', 'Comment Deleted Successfully!');
             return res.redirect('back');
 
