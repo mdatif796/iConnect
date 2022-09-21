@@ -1,8 +1,11 @@
 <% if(profile_user.id == locals.user.id){ %> 
     
-    <form action="/users/update/<%= profile_user.id %> " method="post">
+    <img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
+
+    <form action="/users/update/<%= profile_user.id %> " method="post" enctype="multipart/form-data">
         <input type="text" name="name" value="<%= profile_user.name %> " placeholder="Your Name" required>
         <input type="email" name="email" value="<%= profile_user.email %> " placeholder="Your Email" required>
+        <input type="file" name="avatar" placeholder="upload profile pic">
         <input type="submit" value="Update">
     </form>
 

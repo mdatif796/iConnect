@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const fs = require('fs');  // fs is used to remove the file name also when we update the new avatar
+const path = require('path');
 
 
 // render the user page
@@ -35,12 +37,34 @@ module.exports.profile = async function(req, res){
 module.exports.update = async function(req, res){
     try {
         if(req.user.id == req.params.id){
-            await User.findByIdAndUpdate(req.params.id, req.body);
-            req.flash('success', 'User Updated Successfully!');
-            return res.redirect('back');
+            // await User.findByIdAndUpdate(req.params.id, req.body);
+            // req.flash('success', 'User Updated Successfully!');
+            // return res.redirect('back');
             // User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
             //     return res.redirect('back');
             // });
+
+            let user = await User.findById(req.params.id);
+            
+            // this form contains multipart data , that's why we don't simply use req.body.name for fetching the value 
+            User.uploadAvatar(req, res, function(err){
+                if(err){console.log('******multer**** ', err); return}
+                user.name = req.body.name;
+                user.email = req.body.email;
+                // if the file exist 
+                if(req.file){
+
+                    // check if user has already a avatar
+                    if(user.avatar){
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                req.flash('success', 'User Updated Successfully!');
+                return res.redirect('back');
+            });
         }else{
             req.flash('error', 'You cannot update this profile!');
             return res.status(401).send('Unauthorized!!');
