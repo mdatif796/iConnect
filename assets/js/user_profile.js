@@ -6,6 +6,8 @@
 //   }
 // });
 
+
+// logic for showing the preview of user image
 imgInp.onchange = evt => {
   const [file] = imgInp.files;
   console.log(file);
