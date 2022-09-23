@@ -16,6 +16,7 @@ const db = require('./config/databaseConnection');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJwtStrategy = require('./config/passport-jwt-strategy');
 // for permanently store session cookies to db
 const MongoStore = require('connect-mongo');
 // scss
@@ -62,7 +63,7 @@ app.set('views', path.join(__dirname, 'views'));  // OR app.set('views', './view
 
 app.use(session({
     name: 'iConnect',
-    secret: 'jaihind',
+    secret: process.env.SESSIONSECRETKEY,
     saveUninitialized: false,
     resave: false,
     cookie: {
