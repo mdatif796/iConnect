@@ -3,7 +3,7 @@
     width: 100%;
 
     .log-in{
-        height: 40%;
+        // height: 40%;
         width: 30%;
         margin: auto;
         margin-top: 3%;
@@ -45,5 +45,47 @@
                 margin-top: 1rem;
             }
         }
+        #a-google{
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 0.8rem;
+            margin-bottom: 2rem;
+
+            #google-sign-in{
+                background-color: #5f59f8;
+                border-radius: 4px;
+                width: 90%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 2.5rem;
+                font-size: 1.5rem;
+                #google-icon{
+                    background-color: #ffffff;
+                    width: 7%;
+                    height: 90%;
+                    margin-left: 2px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                #google-name{
+                    height: 100%;
+                    width: 93%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                }
+            }
+        }
+        
     }
 }

@@ -36,3 +36,38 @@
         color: #ffffff;
         outline: none;
         margin-top: 1rem; }
+    .sign-up-container .sign-up #a-google {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 0.8rem;
+      margin-bottom: 2rem; }
+      .sign-up-container .sign-up #a-google #google-sign-in {
+        background-color: #5f59f8;
+        border-radius: 4px;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.5rem;
+        font-size: 1.5rem; }
+        .sign-up-container .sign-up #a-google #google-sign-in #google-icon {
+          background-color: #ffffff;
+          width: 7%;
+          height: 90%;
+          margin-left: 2px;
+          display: flex;
+          align-items: center;
+          justify-content: center; }
+          .sign-up-container .sign-up #a-google #google-sign-in #google-icon img {
+            width: 20px;
+            height: 20px; }
+        .sign-up-container .sign-up #a-google #google-sign-in #google-name {
+          height: 100%;
+          width: 93%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #ffffff; }

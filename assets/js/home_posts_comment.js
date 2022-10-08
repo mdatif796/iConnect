@@ -1,6 +1,5 @@
+let allCommentForm = $(' .comment-section');   // contains all the comment form of post
 {
-    
-    let allCommentForm = $(' .comment-section');   // contains all the comment form of post
     let commentDltBtn = $(' .comment-dlt-btn');   // contains all the dlt btn of comment
 
     // method to create comment using AJAX

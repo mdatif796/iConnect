@@ -17,6 +17,7 @@
                     $('#posts-list-container').prepend(newPost(data.data));
                     // add the new post delete button to aTag
                     aTag = $(' .post-dlt-btn');
+                    allCommentForm = $(' .comment-section');   // contains all the comment form of post
 
                     aTag.click(function(e){
                         e.preventDefault();
@@ -58,8 +59,8 @@
                     </h1>
                     <p>${ data.post.user.name } </p>
                     <div class="post-comment">
-                        <form action="/comments/create" method="post">
-                            <input type="text" name="content" required placeholder="Type Here your comments...">
+                        <form class="comment-section" action="/comments/create" method="post">
+                            <input class="comment-input" type="text" name="content" required placeholder="Type Here your comments...">
                             <input type="hidden" name="post" value="${ data.post._id }">
                             <input type="submit" value="Add Comment">
                         </form>
