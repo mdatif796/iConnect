@@ -29,6 +29,13 @@ router.post('/create-session', passport.authenticate('local', {failureRedirect: 
     userController.create_session
 );
 
+
+// forget password routes 
+router.get('/sign-in/forget-password-page', userController.forgetPasswordPage);
+router.post('/sign-in/forget-password-email', userController.forgetPasswordEmail);
+router.get('/sign-in/forget-password/:userId/:token', userController.forgetPasswordVerify);
+router.post('/sign-in/forget-password/:userId/:token', userController.forgetPasswordVerify);
+
 // get request for sign out
 router.get('/sign-out', passport.checkAuthentication, userController.destroySession);
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));

@@ -1,4 +1,4 @@
-const nodeMailer = require('../../config/nodemailer');
+const nodeMailer = require('../config/nodemailer');
 
 
 exports.newComment = (comment) => {

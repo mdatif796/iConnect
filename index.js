@@ -39,7 +39,7 @@ app.use(nodeSassMiddleware({
 
 
 // for parsing the data which comes from browser
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 // for parsing the cookie
 app.use(cookieParser());
 

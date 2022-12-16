@@ -1,6 +1,10 @@
 const User = require('../models/user');
+const Token = require('../models/token');
+const crypto = require('crypto');
 const fs = require('fs');  // fs is used to remove the file name also when we update the new avatar
 const path = require('path');
+const queue = require('../config/kue');
+const forgetPasswordMailer = require('../workers/forgetPassword_emails_worker');
 
 
 // render the user page
@@ -190,6 +194,87 @@ module.exports.destroySession = async function(req, res){
     //     return res.redirect('/');
     // }
     
+}
+
+module.exports.forgetPasswordPage = async (req, res) => {
+    return res.render('forget_password', {
+        title: 'forget-password-page',
+        token: ''
+    });
+}
+
+module.exports.forgetPasswordEmail = async (req, res) => {
+    try {
+        let user = await User.findOne({email: req.body.email});
+        if(!user){
+            req.flash('success', 'Email does not exist');
+            return res.redirect('back');
+        }
+    
+        let token = await Token.findOne({userId: user._id});
+        if(!token){
+            token = await Token.create({
+                userId: user._id,
+                token: crypto.randomBytes(32).toString("hex")
+            });
+        }
+    
+        token = await token.populate('userId', 'name email');
+    
+        let job = queue.create('forgetPasswordEmail', token).save((err) => {
+            if(err){ console.log('Error in creating a job' , err); return; }
+            console.log(job.id);
+        });
+    
+        req.flash('success', 'Password recovery email sent!');
+        return res.redirect('/users/sign-in');
+    } catch (error) {
+        console.log('error: ', error);
+        req.flash('error', 'Error');
+        return res.redirect('/users/sign-in');
+    }
+}
+
+module.exports.forgetPasswordVerify = async (req, res) => {
+    
+
+    let user = await User.findById(req.params.userId);
+    console.log('user: ', user);
+    if(!user){
+        req.flash('error', 'User not exit');
+        return res.redirect('/users/sign-in');
+    }
+
+    let token = await Token.findOne({
+        userId: user._id,
+        token: req.params.token
+    });
+
+    if(!token){
+        req.flash('error', 'Token or Link Expired!');
+        return res.redirect('/users/sign-in');
+    }
+
+    await token.populate('userId', '_id');
+
+    if(!req.body.password){
+        return res.render('forget_password', {
+            token: token,
+            title: 'forget-password-page'
+        });
+    }
+
+    if(req.body.password !== req.body.confirm_password){
+        req.flash('error', 'password and confirm password does not match');
+        return res.redirect('back');
+    }
+
+    user.password = await req.body.password;
+    await user.save();
+    await token.delete();
+
+    req.flash('success', 'Password Changed Successfully!');
+    return res.redirect('/users/sign-in');
 }
 
 
