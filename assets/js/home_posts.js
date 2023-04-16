@@ -57,6 +57,7 @@
                         <a class="post-dlt-btn" href="/posts/destroy/${ data.post._id } ">X</a>
                         ${ data.post.content }  
                     </h1>
+                    <p><a id="toggle-like" href="/likes/toggle?id=${data.post._id}&type=Post"><span id="post-like-count">0</span> likes</a><p>
                     <p>${ data.post.user.name } </p>
                     <div class="post-comment">
                         <form class="comment-section" action="/comments/create" method="post">

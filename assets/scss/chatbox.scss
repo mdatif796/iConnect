@@ -1,0 +1,59 @@
+#chatbox-container{
+    background-color: #ededfb;
+    width: 250px;
+    height: 300px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    border: 1px dotted black;
+    display: flex;
+    flex-direction: column;
+
+
+    #chat-messages{
+        flex-grow: 2;
+        padding: 15px 8px;
+        overflow: scroll;
+
+        .message{
+            padding: 10px;
+            display: inline-block;
+        }
+        #recieve-message{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 50px;
+            .message{
+                background-color: palevioletred;
+            }
+        }
+        #send-message{
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .message{
+                background-color: skyblue;
+            }
+        }
+
+    }
+    #send-message-container{
+        width: 100%;
+        display: flex;
+        
+        input{
+            flex-grow: 2;
+            // border-color: skyblue;
+            outline-color: skyblue;
+            padding: 5px;
+        }
+        button{
+            border: none;
+            background-color: green;
+            color: white;
+            padding:  5px 10px;
+        }
+    }
+}

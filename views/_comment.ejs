@@ -3,7 +3,12 @@
         <% if(locals.user && (locals.user.id == comment.user.id)) { %> 
             <a class="comment-dlt-btn" href="/comments/destroy/<%= comment.id %>">X</a>
         <% } %> 
-        <%= comment.content%>    
+        <%= comment.content%> 
+        <% if(locals.user) { %> 
+            <p><a id="toggle-like" href="/likes/toggle?id=<%= comment.id %>&type=Comment"><span id="comment-like-count"><%= comment.likes.length %></span> likes</a></p>
+        <% } else { %>
+            <p><span id="comment-like-count"><%= comment.likes.length %> </span> likes</p>    
+        <% } %>    
     </p>
     <p><%= comment.user.name %> </p>
 </div>

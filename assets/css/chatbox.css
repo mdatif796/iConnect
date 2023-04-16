@@ -1,0 +1,43 @@
+#chatbox-container {
+  background-color: #ededfb;
+  width: 250px;
+  height: 300px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  border: 1px dotted black;
+  display: flex;
+  flex-direction: column; }
+  #chatbox-container #chat-messages {
+    flex-grow: 2;
+    padding: 15px 8px;
+    overflow: scroll; }
+    #chatbox-container #chat-messages .message {
+      padding: 10px;
+      display: inline-block; }
+    #chatbox-container #chat-messages #recieve-message {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 50px; }
+      #chatbox-container #chat-messages #recieve-message .message {
+        background-color: palevioletred; }
+    #chatbox-container #chat-messages #send-message {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; }
+      #chatbox-container #chat-messages #send-message .message {
+        background-color: skyblue; }
+  #chatbox-container #send-message-container {
+    width: 100%;
+    display: flex; }
+    #chatbox-container #send-message-container input {
+      flex-grow: 2;
+      outline-color: skyblue;
+      padding: 5px; }
+    #chatbox-container #send-message-container button {
+      border: none;
+      background-color: green;
+      color: white;
+      padding: 5px 10px; }

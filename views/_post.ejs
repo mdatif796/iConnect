@@ -5,6 +5,11 @@
         <% } %>  
         <%= post.content %>   
     </h1>
+    <% if((locals.user)) { %>
+        <p><a id="toggle-like" href="/likes/toggle?id=<%= post._id %>&type=Post"><span id="post-like-count"><%= post.likes.length %></span> likes</a><p>
+    <% } else { %>
+        <p><span id="post-like-count"><%= post.likes.length %> </span> likes</p>
+    <% } %>
     <p><%= post.user.name %> </p>
 <% if(locals.user){ %> 
     <div class="post-comment">

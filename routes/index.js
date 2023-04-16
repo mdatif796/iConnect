@@ -13,6 +13,7 @@ router.use('/users', require('./user'));
 router.use('/posts', require('./post'));
 // any request that came for '/comment' fromm browser sent to routes of comment
 router.use('/comments', require('./comment'));
+router.use('/likes', require('./likes'));
 
 // request that comes for /api
 router.use('/api', require('./api'));

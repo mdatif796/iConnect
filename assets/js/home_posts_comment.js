@@ -51,6 +51,7 @@ let allCommentForm = $(' .comment-section');   // contains all the comment form 
                         <a class="comment-dlt-btn" href="/comments/destroy/${ comment._id }">X</a>
                         ${ comment.content }   
                     </p>
+                    <p><a id="toggle-like" href="/likes/toggle?id=${comment.id}&type=Comment"><span id="comment-like-count">0</span> likes</a><p>
                     <p>${ comment.user.name }</p>
                 </div>`
     }
@@ -93,5 +94,7 @@ let allCommentForm = $(' .comment-section');   // contains all the comment form 
 
     
     createNewComment();
+
+    // making ajax request when 
 
 }

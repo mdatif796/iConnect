@@ -6,15 +6,16 @@ module.exports.home = async function(req, res){
     try {
         let posts = await Post.find({})
         .sort('-createdAt')
-        .populate('user')
+        .populate('user', '-password')
         .populate({
             path: 'comments',
             populate: {
                 path: 'user'
             }
-        });
+        }).populate('likes');
 
         let users = await User.find({});
+        console.log(posts);
 
         return res.render('home', {
             title: "iConnect | home",
